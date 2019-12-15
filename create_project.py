@@ -56,7 +56,7 @@ def newProject():
 
     else:
         # Print the existing repositories
-        print(f'\n{project_name} not found in user repos:')
+        print(f'\n{project_name} not found. User repos found:')
         for repo in g.get_user().get_repos():
             print('\t-' + repo.name)
 
@@ -77,7 +77,6 @@ def newProject():
 
         else:
             print('Repository creation cancelled\n')
-            return
 
 
 newProject()
