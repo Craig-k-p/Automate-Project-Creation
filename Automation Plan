@@ -1,0 +1,15 @@
+Project automation
+
+
+Goals of this project:
+
+	-Create a repository on GitHub and pull to the local computer
+
+		-DONE Navigate to the proper directory
+		-DONE (with GitHub clone) Create a new directory for the project
+		-DONE (GitHub clone automatically does this) Initialize Git
+		-DONE Create a new Git repository
+		-DONE Copy the remote project
+		-DONE Add remote to the local projects folder
+		-DONE Create a readme file
+		-DONE Clone the GitHub repo to the local projects directory
