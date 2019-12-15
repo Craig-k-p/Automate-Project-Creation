@@ -1,4 +1,3 @@
-# Create a new project folder, initialize the project with Git, and push to Github
 import os
 import sys
 import getpass
@@ -7,6 +6,11 @@ import github
 
 
 def newProject():
+
+    # Grab the string passed from the terminal as the project name
+    project_name = str(sys.argv[1])
+
+    # Settings file for project folder path, GitHub username, token
     settings_file = '.create_project_settings.txt'
 
     # Get the user's personal access token, project path, and GitHub username from the settings file
@@ -16,6 +20,7 @@ def newProject():
             token = settings[3].strip()
             # Get the user's path for saving the new repository
             project_path = settings[4].strip()
+            # Get the user's GitHub username
             github_username = settings[5].strip()
             # Change to the project directory
             os.chdir(project_path)
@@ -26,6 +31,7 @@ def newProject():
     except FileNotFoundError:
         print(f'"{settings_file}" was not found in the user\'s home directory')
         print(f'Please check the Readme file for instructions.  Ending execution..\n')
+        return
 
     # If user input "token" is not blank use their input as the token
     else:
@@ -37,9 +43,6 @@ def newProject():
     except github.BadCredentialsException:
         print('Github token is invalid.  Ending execution..')
         return
-
-    # Grab the string passed from the terminal as the project name
-    project_name = str(sys.argv[1])
 
     # Check if the directory already exists on the local computer
     if project_name in os.listdir():
@@ -70,7 +73,7 @@ def newProject():
             repo.create_file('Readme.txt', 'Initial readme creation', f'')
 
             # Clone the repository to the current working directory
-            os.system(f'git clone https://github.com/Craig-k-p/{project_name}')
+            os.system(f'git clone https://github.com/{github_username}/{project_name}')
 
         else:
             print('Repository creation cancelled\n')
@@ -78,5 +81,3 @@ def newProject():
 
 
 newProject()
-
-# git clone https://github.com/Craig-k-p/hk

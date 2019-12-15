@@ -1,0 +1,6 @@
+Enter your token on line 4, path (from home folder) to the parent directory of new repositories on line 5, and GitHub username on line 6.  
+	-This file must be in the user's home directory
+	-Name the file ".create_project_settings.txt".  Use ctrl+h to unhide the file (Ubuntu 19.10)
+[Your GitHub token goes here] see: 
+[path/to/parent/folder/of/newly/created/repositories - Do not start with "~/"]
+[Your GitHub Username]
