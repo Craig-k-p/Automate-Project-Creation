@@ -2,17 +2,16 @@
 
 This project is designed to allow the user to use the "create_project [project_name]"
 command in a Bash terminal to create a new repository on GitHub and pull it to the
-local computer.  The command works for any user that follows the readme file
+local computer to save time.  The command works for any user that follows the readme file
 instructions.
 
 Requirements:
 	-Bash terminal
 	-Git can communicate with GitHub on your Bash terminal
+	-Ubuntu or other Linux distro
 
-Tested on Ubuntu 19.10
 
-
-Instructions:
+Setup instructions:
 
 - Download this repository and note the file path from your home directory
 
