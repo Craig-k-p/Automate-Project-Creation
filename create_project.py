@@ -1,6 +1,6 @@
 import os
 import sys
-import getpass
+
 # PyGithub Module - Documentation: pygithub.readthedocs.io
 import github
 
@@ -40,6 +40,8 @@ def newProject():
     # Check that the user credentials are valid by attempting to read the first repository
     try:
         g.get_user().get_repos()[0].name
+
+    # If GitHub does not accept the user token end program execution
     except github.BadCredentialsException:
         print('Github token is invalid.  Ending execution..')
         return
