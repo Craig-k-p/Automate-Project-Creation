@@ -1,3 +1,4 @@
+import getpass
 import os
 import sys
 # PyGithub Module - Documentation: pygithub.readthedocs.io
@@ -13,28 +14,28 @@ def newProject():
     settings_file = '.create_project_settings.txt'
 
     # Get the user's personal access token, project path, and GitHub username from the settings file
-    try:
-        with open(settings_file, 'r') as f:
-            settings = f.readlines()
-            token = settings[3].strip()
-            # Get the user's path for saving the new repository
-            project_path = settings[4].strip()
-            # Get the user's GitHub username
-            github_username = settings[5].strip()
-            # Change to the project directory
-            os.chdir(project_path)
+    # try:
+    with open(settings_file, 'r') as f:
+        settings = f.readlines()
+        # token = settings[3].strip()
+        # Get the user's path for saving the new repository
+        project_path = settings[4].strip()
+        # Get the user's GitHub username
+        github_username = settings[5].strip()
+        # Change to the project directory
+        os.chdir(project_path)
 
-        g = github.Github(token)
+    g = github.Github(github_username, getpass.getpass(prompt=f'Password for GitHub user {github_username} >> '))
 
-    # If the file wasn't found, handle it nicely and provide a suggested remedy
-    except FileNotFoundError:
-        print(f'"{settings_file}" was not found in the user\'s home directory')
-        print(f'Please check the Readme file for instructions.  Ending execution..\n')
-        return
+    # # If the file wasn't found, handle it nicely and provide a suggested remedy
+    # except FileNotFoundError:
+    #     print(f'"{settings_file}" was not found in the user\'s home directory')
+    #     print(f'Please check the Readme file for instructions.  Ending execution..\n')
+    #     return
 
     # If user input "token" is not blank use their input as the token
-    else:
-        g = github.Github(token)
+    # else:
+    #     g = github.Github(token)
 
     # Check that the user credentials are valid by attempting to read the first repository
     try:
@@ -49,9 +50,10 @@ def newProject():
     if project_name in os.listdir():
         # The directory already exists, so report the error and stop the script
         print(f'Project directory {project_name} already exists on local computer.')
+        return
 
     # Check if the repository already exists on the user's GitHub
-    if project_name in [repo.name for repo in g.get_user().get_repos()]:
+    elif project_name in [repo.name for repo in g.get_user().get_repos()]:
         print(f'Project {project_name} already exists on GitHub.  Ending execution..\n')
         return
 
