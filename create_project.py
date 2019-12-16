@@ -1,6 +1,5 @@
 import os
 import sys
-
 # PyGithub Module - Documentation: pygithub.readthedocs.io
 import github
 
