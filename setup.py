@@ -1,8 +1,8 @@
 ''' This file can be used to quickly setup the files needed to execute create_project.py
 Steps:
-    - Move file temp.create_project_command.sh to home dir if it doesn't exist already
+    - Move file setup.create_project_command.sh to home dir if it doesn't exist already
         - Get path to create_project.py
-    - Move file temp.create_project_settings.txt to home dir if it doesn't exist already
+    - Move file setup.create_project_settings.txt to home dir if it doesn't exist already
         - Get path to the default directory for project pulling
         - Get the user's GitHub username
     - backup .bashrc file
@@ -21,7 +21,7 @@ import sys
 def setupSettings(user):
 
     while user['github_username'] is '':
-        # Move temp.create_project_settings.txt to the home folder
+        # Move setup.create_project_settings.txt to the home folder
         user['github_username'] = input('What is your GitHub username?  >> ')
 
     # Open a file selection dialog box and have the user select which directory new projects will be stored
@@ -38,9 +38,9 @@ def setupSettings(user):
 
 def getSetupFileData(user):
 
-    # Open temp.create_project_settings.txt and write the user's preferred dir for
+    # Open setup.create_project_settings.txt and write the user's preferred dir for
     # new projects and their GitHub username to the file
-    with open(user['setup_dir'] + 'temp.create_project_settings.txt', 'r') as temp_settings:
+    with open(user['setup_dir'] + 'setup.create_project_settings.txt', 'r') as temp_settings:
         lines = temp_settings.readlines()
         lines.append(user['new_project_dir'] + '\n')
         lines.append(user['github_username'] + '\n')
@@ -48,16 +48,16 @@ def getSetupFileData(user):
             print(l)
         user['.create_project_settings.txt'] = lines
 
-    # Open temp.bashrc and write the path to the parent dir of this script
+    # Open setup.bashrc and write the path to the parent dir of this script
     # for documentation
-    with open(user['setup_dir'] + 'temp.bashrc', 'r') as temp_bashrc:
+    with open(user['setup_dir'] + 'setup.bashrc', 'r') as temp_bashrc:
         lines = temp_bashrc.readlines()
         lines[1] = lines[1].replace('[path to file]', user['path_to_script'])
-        user['temp.bashrc'] = lines
+        user['setup.bashrc'] = lines
 
-    # Open temp.create_project_command.txt and write the path to the parent
+    # Open setup.create_project_command.txt and write the path to the parent
     # directory of this script so the command can find create_project.py
-    with open(user['setup_dir'] + 'temp.create_project_command.txt', 'r') as temp_create_project_command:
+    with open(user['setup_dir'] + 'setup.create_project_command.txt', 'r') as temp_create_project_command:
         lines = temp_create_project_command.readlines()
         lines[9] = lines[9].replace('[path to script]', user['path_to_script'])
         user['.create_project_command.sh'] = lines
@@ -76,7 +76,7 @@ def backupBash(user):
 
 
 def setupBash(user):
-    # Open .bashrc and insert lines from temp.bashrc
+    # Open .bashrc and insert lines from setup.bashrc
     with open(user['home_dir'] + user['bashrc_file'], 'r') as bashrc:
         user['.bashrc'] = bashrc.readlines()
 
@@ -86,8 +86,8 @@ def setupBash(user):
     else:
 
         # Insert a blank line into the new lines
-        user['temp.bashrc'].insert(0, '\n')
-        user['temp.bashrc'].insert(len(user['temp.bashrc']), '\n')
+        user['setup.bashrc'].insert(0, '\n')
+        user['setup.bashrc'].insert(len(user['setup.bashrc']), '\n')
 
         # This is a code snippet found near the top of the original .bashrc file
         # Use these to find some empty lines underneath to be sure the commands
@@ -117,7 +117,7 @@ def setupBash(user):
         if i1 < i2 < i3 < i4:
             # Insert new lines with surrounding blank lines
             i = i4
-            for new_line in user['temp.bashrc']:
+            for new_line in user['setup.bashrc']:
                 i += 1
                 user['.bashrc'].insert(i, new_line)
 
