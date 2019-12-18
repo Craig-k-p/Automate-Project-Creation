@@ -19,9 +19,9 @@ def newProject():
         settings = f.readlines()
         # token = settings[3].strip()
         # Get the user's path for saving the new repository
-        project_path = settings[4].strip()
+        project_path = settings[5].strip()
         # Get the user's GitHub username
-        github_username = settings[5].strip()
+        github_username = settings[6].strip()
         # Change to the project directory
         os.chdir(project_path)
 
